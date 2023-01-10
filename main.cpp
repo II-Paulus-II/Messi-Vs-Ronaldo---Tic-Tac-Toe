@@ -1,5 +1,7 @@
 #include <iostream>
-#include <windows.h>
+//#include <windows.h>
+#include "header.h"
+#include "resource.h"
 
 using namespace std;
 
@@ -40,7 +42,7 @@ int WINAPI WinMain (HINSTANCE hThisInstance,
     hwnd = CreateWindowEx (
            0,                   /* Extended possibilites for variation */
            szClassName,         /* Classname */
-           _T("Death Con 5 -- Messi VS Ronaldo"),       /* Title Text */
+           _T("The Title of the Window"),       /* Title Text */
            WS_OVERLAPPED | WS_MINIMIZEBOX | WS_SYSMENU, /* default window */
            CW_USEDEFAULT,       /* Windows decides the position */
            CW_USEDEFAULT,       /* where the window ends up on the screen */
@@ -54,4 +56,20 @@ int WINAPI WinMain (HINSTANCE hThisInstance,
 
     /* Make the window visible on the screen */
     ShowWindow (hwnd, nCmdShow);
+
+    /*if (!ronaldo | !messi){
+        MessageBox(hwnd, "Picture Not Loaded", "Unlucks",
+            MB_OK);
+    }*/
+    /* Run the message loop. It will run until GetMessage() returns 0 */
+    while (GetMessage (&messages, NULL, 0, 0))
+    {
+        /* Translate virtual-key messages into character messages */
+        TranslateMessage(&messages);
+        /* Send message to WindowProcedure */
+        DispatchMessage(&messages);
+    }
+
+    /* The program return-value is 0 - The value that PostQuitMessage() gave */
+    return messages.wParam;
 }
