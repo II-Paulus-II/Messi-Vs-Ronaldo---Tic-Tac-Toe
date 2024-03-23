@@ -1,6 +1,5 @@
 #include "../include/main.h"
 
-extern enum square_x_o { blank, its_messi, its_ronaldo };
 extern square_x_o player_Turn = blank;
 extern square_x_o board_value[3][3] = { { blank , blank , blank },
                                 { blank , blank , blank },

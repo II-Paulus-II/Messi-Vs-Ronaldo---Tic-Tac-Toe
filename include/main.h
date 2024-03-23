@@ -22,7 +22,7 @@ BOOL                InitInstance(HINSTANCE, int);
 LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
 INT_PTR CALLBACK    About(HWND, UINT, WPARAM, LPARAM);
 
-extern enum square_x_o;
+extern enum square_x_o { blank, its_messi, its_ronaldo };
 extern square_x_o player_Turn;
 extern square_x_o board_value[3][3];
 
