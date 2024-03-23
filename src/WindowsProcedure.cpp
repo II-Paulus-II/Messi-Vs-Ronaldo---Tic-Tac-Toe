@@ -117,6 +117,13 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         case IDM_ABOUT:
             DialogBox(hInst, MAKEINTRESOURCE(IDD_ABOUTBOX), hWnd, About);
             break;
+        case ID_FILE_NEWGAME:
+        {
+            new_Game(); //make sure that the enum is filled out blank
+            start_Game = true;
+            InvalidateRect(hWnd, NULL, TRUE);
+        }
+        break;
         case IDM_EXIT:
             DestroyWindow(hWnd);
             break;
