@@ -105,7 +105,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    }
 
    if (!messi || !ronaldo) {
-       MessageBox(hWnd, L"Pictures Not Loaded", L"Unlucks",
+       MessageBox(hWnd, L"Pictures Not Loaded", L"Unlucky",
            MB_OK);
    }
 

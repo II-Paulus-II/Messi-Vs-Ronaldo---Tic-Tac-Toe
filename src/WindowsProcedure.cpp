@@ -88,13 +88,13 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             }
             bool messi_wins = winner_Messi();
             if (messi_wins) {
-                MessageBox(hWnd, _T("Messi"), _T("Messi"), MB_OK);
+                MessageBox(hWnd, _T("Messi Won"), _T("Result"), MB_OK);
                 new_Game();
                 InvalidateRect(hWnd, NULL, TRUE);
             }
             bool ronaldo_wins = winner_Ronaldo();
             if (ronaldo_wins) {
-                MessageBox(hWnd, _T("Ronaldo"), _T("Ronaldo"), MB_OK);
+                MessageBox(hWnd, _T("Ronaldo Won"), _T("Result"), MB_OK);
                 new_Game();
                 InvalidateRect(hWnd, NULL, TRUE);
             }
