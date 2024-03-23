@@ -136,6 +136,7 @@
     <ClInclude Include="resources\resources.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\game.cpp" />
     <ClCompile Include="src\WindowsProcedure.cpp" />
     <ClCompile Include="src\WinMain.cpp" />
   </ItemGroup>

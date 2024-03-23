@@ -8,6 +8,14 @@ HINSTANCE hInst;                                // current instance
 WCHAR szTitle[MAX_LOADSTRING];                  // The title bar text
 WCHAR szWindowClass[MAX_LOADSTRING];            // the main window class name
 
+bool start_Game = false;
+
+LPCWSTR file_messi = L"./data/messi.bmp";
+HBITMAP messi = (HBITMAP)LoadImage(NULL, file_messi, IMAGE_BITMAP, 250, 250, LR_LOADFROMFILE);
+LPCWSTR file_ronaldo = L"./data/ronaldo.bmp";
+HBITMAP ronaldo = (HBITMAP)LoadImage(NULL, file_ronaldo, IMAGE_BITMAP, 250, 250, LR_LOADFROMFILE);
+
+
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                      _In_opt_ HINSTANCE hPrevInstance,
                      _In_ LPWSTR    lpCmdLine,
