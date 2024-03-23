@@ -9,7 +9,7 @@
 //
 //
 
-#include "./include/main.h"
+#include "../include/main.h"
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {

@@ -1,7 +1,7 @@
 // MessiVRonaldoTicTacToe.cpp : Defines the entry point for the application.
 //
 
-#include "./include/main.h"
+#include "../include/main.h"
 
 // Global Variables:
 HINSTANCE hInst;                                // current instance
@@ -17,7 +17,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     UNREFERENCED_PARAMETER(lpCmdLine);
 
     // TODO: Place code here.
-
+    int noob = 5;
     // Initialize global strings
     LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
     LoadStringW(hInstance, IDC_MESSIVRONALDOTICTACTOE, szWindowClass, MAX_LOADSTRING);
