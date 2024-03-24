@@ -11,6 +11,10 @@
 
 #include "../include/main.h"
 
+#define BUTTON(name,PosX,PosY,DEFINITION) ::CreateWindow (L"BUTTON", name, WS_CHILD | WS_BORDER,\
+                                                          PosX, PosY, 100, 50, hWnd,\
+                                                          (HMENU)DEFINITION, NULL, NULL)
+
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
     PAINTSTRUCT ps;
@@ -51,21 +55,29 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     }
     case WM_CREATE:
         //CRASHES IF I HAVE THE MESSAGE BOX OUTSIDE THE SWITCH
+        BUTTON(L"New Game", 150, 50, NEW_GAME_BTN);
 
         break;
     case WM_PAINT:
     {
         hdc = BeginPaint(hWnd, &ps);
+        Gdiplus::Graphics graphics(hdc);
+        Gdiplus::Image MESSI(L"./data/messi.png");
         if (!start_Game) {
+            show_New_Game_Button(hWnd);
+            render_First_Scene(hdc);
+
+            
+            graphics.DrawImage(&MESSI, 40, 40);
 
             RECT rc;
             GetClientRect(hWnd, &rc);
 
             SelectObject(hdc, GetStockObject(DEFAULT_GUI_FONT));
             SetBkMode(hdc, TRANSPARENT);
-            SetTextColor(hdc, RGB(255, 0, 0));
+            SetTextColor(hdc, RGB(0, 0, 0));
 
-            std::wstring strOut = L"Hello World!"; // or wstring if you have unicode set
+            std::wstring strOut = L"VS"; // or wstring if you have unicode set
             DrawText(hdc, strOut.c_str(), strOut.length(), &rc, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
         }
 
@@ -75,7 +87,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             for (int iX = 0; iX < 3; iX++) {
                 for (int iY = 0; iY < 3; iY++) {
                     if (board_value[iX][iY] == its_messi) {
-                        draw_Messi(hdc, iX, iY);
+                        graphics.DrawImage(&MESSI, 40, 40);
                     }
                 }
             }
@@ -121,6 +133,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         {
             new_Game(); //make sure that the enum is filled out blank
             start_Game = true;
+            show_New_Game_Button(hWnd);
             InvalidateRect(hWnd, NULL, TRUE);
         }
         break;

@@ -11,6 +11,10 @@ extern WCHAR szWindowClass[MAX_LOADSTRING];            // the main window class 
 
 extern bool start_Game;
 
+extern LPCWSTR file_mainimage;
+extern HBITMAP mainimage;
+extern LPCWSTR file_gameimage;
+extern HBITMAP gameimage;
 extern LPCWSTR file_messi;
 extern HBITMAP messi;
 extern LPCWSTR file_ronaldo;
@@ -39,3 +43,6 @@ void new_Game();
 bool winner_Messi();
 bool winner_Ronaldo();
 bool nobody_Wins();
+
+void show_New_Game_Button(HWND hWnd);
+void render_First_Scene(HDC hdc);

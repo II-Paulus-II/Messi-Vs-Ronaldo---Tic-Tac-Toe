@@ -10,11 +10,19 @@ WCHAR szWindowClass[MAX_LOADSTRING];            // the main window class name
 
 bool start_Game = false;
 
+LPCWSTR file_mainimage = L"./data/main.bmp";
+HBITMAP mainimage = (HBITMAP)LoadImage(NULL, file_mainimage, IMAGE_BITMAP, 250, 250, LR_LOADFROMFILE);
+
+LPCWSTR file_gameimage = L"./data/gamebackground.bmp";
+HBITMAP gameimage = (HBITMAP)LoadImage(NULL, file_gameimage, IMAGE_BITMAP, 1075, 825, LR_LOADFROMFILE);
+
 LPCWSTR file_messi = L"./data/messi.bmp";
-HBITMAP messi = (HBITMAP)LoadImage(NULL, file_messi, IMAGE_BITMAP, 250, 250, LR_LOADFROMFILE);
+HBITMAP messi = (HBITMAP)LoadImage(NULL, file_messi, IMAGE_BITMAP, 250, 250, LR_LOADTRANSPARENT);
+
 LPCWSTR file_ronaldo = L"./data/ronaldo.bmp";
 HBITMAP ronaldo = (HBITMAP)LoadImage(NULL, file_ronaldo, IMAGE_BITMAP, 250, 250, LR_LOADFROMFILE);
 
+using namespace Gdiplus;
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                      _In_opt_ HINSTANCE hPrevInstance,
@@ -25,7 +33,11 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     UNREFERENCED_PARAMETER(lpCmdLine);
 
     // TODO: Place code here.
+    GdiplusStartupInput gdiplusStartupInput;
+    ULONG_PTR           gdiplusToken;
 
+    // Initialize GDI+.
+    GdiplusStartup(&gdiplusToken, &gdiplusStartupInput, NULL);
     // Initialize global strings
     LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
     LoadStringW(hInstance, IDC_MESSIVRONALDOTICTACTOE, szWindowClass, MAX_LOADSTRING);
@@ -50,7 +62,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
             DispatchMessage(&msg);
         }
     }
-
+    GdiplusShutdown(gdiplusToken);
     return (int) msg.wParam;
 }
 
@@ -96,18 +108,18 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 {
    hInst = hInstance; // Store instance handle in our global variable
 
-   HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
-      CW_USEDEFAULT, 0, 775, 815, nullptr, nullptr, hInstance, nullptr);
+   HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPED | WS_MINIMIZEBOX | WS_SYSMENU,
+      CW_USEDEFAULT, 0, 1075, 865, nullptr, nullptr, hInstance, nullptr);
 
    if (!hWnd)
    {
       return FALSE;
    }
 
-   if (!messi || !ronaldo) {
+   /*if (&messiJPG == NULL) {
        MessageBox(hWnd, L"Pictures Not Loaded", L"Unlucky",
            MB_OK);
-   }
+   }*/
 
    ShowWindow(hWnd, nCmdShow);
    UpdateWindow(hWnd);

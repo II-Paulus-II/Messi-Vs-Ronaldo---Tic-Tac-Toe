@@ -6,8 +6,66 @@ extern square_x_o board_value[3][3] = { { blank , blank , blank },
                                 { blank , blank , blank } };
 
 
-void draw_Board(HDC hdc)
-{
+void render_First_Scene(HDC hdc) {
+    HDC hdcMem = CreateCompatibleDC(hdc); //
+    SelectObject(hdcMem, messi);
+    int PosX = 100;
+    int PosY = 200;
+
+    BitBlt(
+        hdc,
+        PosX,
+        PosY,
+        250,
+        250,
+        hdcMem,
+        0,
+        0,
+        SRCCOPY);
+
+    SelectObject(hdcMem, messi);
+    DeleteObject(hdcMem);
+
+    HDC hdcMemA = CreateCompatibleDC(hdc); //
+    SelectObject(hdcMemA, ronaldo);
+    PosX = 400;
+    PosY = 200;
+
+    BitBlt(
+        hdc,
+        PosX,
+        PosY,
+        250,
+        250,
+        hdcMemA,
+        0,
+        0,
+        SRCCOPY);
+
+    SelectObject(hdcMemA, ronaldo);
+    DeleteObject(hdcMemA);
+}
+
+void draw_Board(HDC hdc) {
+    //Draw Background Image
+    HDC hdcMem = CreateCompatibleDC(hdc); 
+    SelectObject(hdcMem, gameimage);
+
+    BitBlt(
+        hdc,
+        0,
+        0,
+        1075,
+        825,
+        hdcMem,
+        0,
+        0,
+        SRCCOPY);
+
+    SelectObject(hdcMem, gameimage);
+    DeleteObject(hdcMem);
+
+    //Draw Board First
     HPEN hPenOld;
     // Draw the board lines
     HPEN hLinePen;
@@ -31,8 +89,8 @@ void draw_Board(HDC hdc)
 }
 
 void draw_Messi(HDC hdc, int iX, int iY) {
-    HDC hdcMem = CreateCompatibleDC(hdc); //
-    SelectObject(hdcMem, messi);
+    //HDC hdcMem = CreateCompatibleDC(hdc); //
+   // SelectObject(hdcMem, messi);
     int PosX, PosY;
     if (iX == 0) {
         PosX = 0;
@@ -53,7 +111,7 @@ void draw_Messi(HDC hdc, int iX, int iY) {
         PosY = 520;
     }
 
-    BitBlt(
+   /* BitBlt(
         hdc,
         PosX,
         PosY,
@@ -62,10 +120,14 @@ void draw_Messi(HDC hdc, int iX, int iY) {
         hdcMem,
         0,
         0,
-        SRCCOPY);
+        SRCCOPY); */
 
-    SelectObject(hdcMem, messi);
-    DeleteObject(hdcMem);
+   // SelectObject(hdcMem, messi);
+   // DeleteObject(hdcMem);
+
+   Gdiplus::Graphics graphics(hdc);
+   Gdiplus::Image messiJPG(L"./data/messi.jpeg");
+   graphics.DrawImage(&messiJPG, PosX, PosY);
 }
 
 void draw_Ronaldo(HDC hdc, int iX, int iY) {
@@ -244,3 +306,13 @@ bool nobody_Wins() {
     return true;
 }
 
+void show_New_Game_Button(HWND hWnd) {
+    HWND new_Game_Button = GetDlgItem(hWnd, NEW_GAME_BTN);
+
+    if (!start_Game) {
+        ShowWindow(new_Game_Button, SW_SHOW);
+    }
+    else {
+        ShowWindow(new_Game_Button, SW_HIDE);
+    }
+}
