@@ -10,6 +10,7 @@
 //
 
 #include "../include/main.h"
+#include <iostream>
 
 #define BUTTON(name,PosX,PosY,DEFINITION) ::CreateWindow (L"BUTTON", name, WS_CHILD | WS_BORDER,\
                                                           PosX, PosY, 100, 50, hWnd,\
@@ -22,34 +23,29 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
     switch (message)
     {
-
     case WM_LBUTTONDOWN:
     {
         if (start_Game) {
-            bool ValidMove = place_Messi(hWnd, lParam);
-            if (ValidMove) {
-                player_Turn = its_ronaldo;
+            if (player_Turn == its_ronaldo) {
+                bool ValidMove = place_Face(hWnd, lParam);
+                if (ValidMove) {
+                    player_Turn = its_messi;
+                    InvalidateRect(hWnd, NULL, FALSE);
+                }
             }
-            else {
-                MessageBox(hWnd, _T("Invalid Move"), _T("Error"), MB_OK);
-            }
-            // Repaint the window after the update
-            InvalidateRect(hWnd, NULL, TRUE);
         }
         break;
     }
     case WM_RBUTTONDOWN:
     {
         if (start_Game) {
-            bool ValidMove = place_Ronaldo(lParam);
-            if (ValidMove) {
-                player_Turn = its_messi;
+            if (player_Turn == its_messi) {
+                bool ValidMove = place_Face(hWnd, lParam);
+                if (ValidMove) {
+                    player_Turn = its_ronaldo;
+                    InvalidateRect(hWnd, NULL, FALSE);
+                }
             }
-            else {
-                MessageBox(hWnd, _T("Invalid Move"), _T("Error"), MB_OK);
-            }
-            // Repaint the window after the update
-            InvalidateRect(hWnd, NULL, TRUE);
         }
         break;
     }
@@ -64,6 +60,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         Gdiplus::Graphics graphics(hdc);
         Gdiplus::Image MESSI(L"./data/messi.png");
         Gdiplus::Image RONALDO(L"./data/ronaldo.png");
+        Gdiplus::Image BACKGROUND(L"./data/gamebackground.png");
         if (!start_Game) {
             show_New_Game_Button(hWnd);
 
@@ -79,10 +76,11 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         }
 
         if (start_Game) {
+            graphics.DrawImage(&BACKGROUND, 0, 0);
             draw_Board(hdc);
             for (int iX = 0; iX < 3; iX++) {
                 for (int iY = 0; iY < 3; iY++) {
-                    int PosX = iX * 260;
+                    int PosX = (iX * 260) + 275;
                     int PosY = iY * 260;
                     if (board_value[iX][iY] == its_messi) {
                         graphics.DrawImage(&MESSI, PosX, PosY, 250, 250);
@@ -106,7 +104,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             }
             bool nobody_won = nobody_Wins();
             if (nobody_won) {
-                MessageBox(hWnd, _T("Nobody"), _T("Nobody"), MB_OK);
+                MessageBox(hWnd, _T("Nobody Won"), _T("Nobody Result"), MB_OK);
                 new_Game();
                 InvalidateRect(hWnd, NULL, TRUE);
             }

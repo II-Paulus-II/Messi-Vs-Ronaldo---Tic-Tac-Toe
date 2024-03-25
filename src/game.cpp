@@ -47,83 +47,107 @@ void render_First_Scene(HDC hdc) {
 }
 
 void draw_Board(HDC hdc) {
-    //Draw Background Image
-    HDC hdcMem = CreateCompatibleDC(hdc); 
-    SelectObject(hdcMem, gameimage);
 
-    BitBlt(
-        hdc,
-        0,
-        0,
-        1075,
-        825,
-        hdcMem,
-        0,
-        0,
-        SRCCOPY);
-
-    SelectObject(hdcMem, gameimage);
-    DeleteObject(hdcMem);
-
-    //Draw Board First
+    //Draw Board
     HPEN hPenOld;
     // Draw the board lines
     HPEN hLinePen;
     COLORREF qLineColor;
     qLineColor = RGB(255, 255, 255);
-    hLinePen = CreatePen(PS_SOLID, 10, qLineColor);
+    hLinePen = CreatePen(PS_SOLID, 6, qLineColor);
     hPenOld = (HPEN)SelectObject(hdc, hLinePen);
     // Draw two vertical lines
-    MoveToEx(hdc, 255, 0, NULL);
-    LineTo(hdc, 255, 765);
-    MoveToEx(hdc, 515, 0, NULL);
-    LineTo(hdc, 515, 765);
+    MoveToEx(hdc, 532, 0, NULL);
+    LineTo(hdc, 532, 767);
+    MoveToEx(hdc, 792, 0, NULL);
+    LineTo(hdc, 792, 767);
     // two horizontal ones
-    MoveToEx(hdc, 0, 255, NULL);
-    LineTo(hdc, 765, 255);
-    MoveToEx(hdc, 0, 515, NULL);
-    LineTo(hdc, 765, 515);
+    MoveToEx(hdc, 275, 257, NULL);
+    LineTo(hdc, 1050, 257);
+    MoveToEx(hdc, 275, 517, NULL);
+    LineTo(hdc, 1050, 517);
 
     SelectObject(hdc, hPenOld);
     DeleteObject(hLinePen);
+}
+
+bool place_Face(HWND hWnd, LPARAM lparam) {
+    int iPosX = LOWORD(lparam);
+    int iPosY = HIWORD(lparam);
+    //check for valid move
+    if (iPosX >=275 && iPosX <= 1040 ) {
+        int iSqX;
+        int iSqY;
+        //get board values
+        if (iPosX >= 275 && iPosX <= 532) {
+            iSqX = 0;
+        }
+        else if (iPosX > 532 && iPosX <= 792) {
+            iSqX = 1;
+        }
+        else if (iPosX > 792) {
+            iSqX = 2;
+        }
+        if (iPosY <= 255) {
+            iSqY = 0;
+        }
+        else if (iPosY > 255 && iPosY <= 515) {
+            iSqY = 1;
+        }
+        else {
+            iSqY = 2;
+        }
+        //assign board values
+        if ((player_Turn == its_messi) &&
+            (iSqX < 3) && (iSqY < 3) &&
+            (board_value[iSqX][iSqY] == blank))
+        {
+            board_value[iSqX][iSqY] = its_messi;
+            return true;
+        }
+        else if ((player_Turn == its_ronaldo) &&
+            (iSqX < 3) && (iSqY < 3) &&
+            (board_value[iSqX][iSqY] == blank))
+        {
+            board_value[iSqX][iSqY] = its_ronaldo;
+            return true;
+        }
+    }
+    return false;
 }
 
 bool place_Messi(HWND hwnd, LPARAM lparam) {
 
     int iPosX = LOWORD(lparam);
     int iPosY = HIWORD(lparam);
-    int iSqX;
-    int iSqY;
-    if (iPosX <= 255) {
-        iSqX = 0;
-        //MessageBox(hwnd,"0", "X", MB_OK);
-    }
-    else if (iPosX > 255 && iPosX <= 515) {
-        //MessageBox(hwnd,"1", "X", MB_OK);
-        iSqX = 1;
-    }
-    else {
-        //MessageBox(hwnd,"2", "X", MB_OK);
-        iSqX = 2;
-    }
-    if (iPosY <= 255) {
-        //MessageBox(hwnd,"0", "Y", MB_OK);
-        iSqY = 0;
-    }
-    else if (iPosY > 255 && iPosY <= 515) {
-        //MessageBox(hwnd,"1", "Y", MB_OK);
-        iSqY = 1;
-    }
-    else {
-        //MessageBox(hwnd,"2", "Y", MB_OK);
-        iSqY = 2;
-    }
-    if ((player_Turn == its_messi) &&
-        (iSqX < 3) && (iSqY < 3) &&
-        (board_value[iSqX][iSqY] == blank))
-    {
-        board_value[iSqX][iSqY] = its_messi;
-        return true;
+    if (iPosX >=275 && iPosX <= 1040 ) {
+        int iSqX;
+        int iSqY;
+        if (iPosX >= 275 && iPosX <= 532) {
+            iSqX = 0;
+        }
+        else if (iPosX > 532 && iPosX <= 792) {
+            iSqX = 1;
+        }
+        else if (iPosX > 792) {
+            iSqX = 2;
+        }
+        if (iPosY <= 255) {
+            iSqY = 0;
+        }
+        else if (iPosY > 255 && iPosY <= 515) {
+            iSqY = 1;
+        }
+        else {
+            iSqY = 2;
+        }
+        if ((player_Turn == its_messi) &&
+            (iSqX < 3) && (iSqY < 3) &&
+            (board_value[iSqX][iSqY] == blank))
+        {
+            board_value[iSqX][iSqY] = its_messi;
+            return true;
+        }
     }
     return false;
 }
@@ -132,32 +156,34 @@ bool place_Ronaldo(LPARAM lparam) {
 
     int iPosX = LOWORD(lparam);
     int iPosY = HIWORD(lparam);
-    int iSqX;
-    int iSqY;
-    if (iPosX <= 255) {
-        iSqX = 0;
-    }
-    else if (iPosX > 255 && iPosX <= 515) {
-        iSqX = 1;
-    }
-    else {
-        iSqX = 2;
-    }
-    if (iPosY <= 255) {
-        iSqY = 0;
-    }
-    else if (iPosY > 255 && iPosY <= 515) {
-        iSqY = 1;
-    }
-    else {
-        iSqY = 2;
-    }
-    if ((player_Turn == its_ronaldo) &&
-        (iSqX < 3) && (iSqY < 3) &&
-        (board_value[iSqX][iSqY] == blank))
-    {
-        board_value[iSqX][iSqY] = its_ronaldo;
-        return true;
+    if (iPosX >=275 && iPosX <= 1040 ) {
+        int iSqX;
+        int iSqY;
+        if (iPosX >= 275 && iPosX <= 532) {
+            iSqX = 0;
+        }
+        else if (iPosX > 532 && iPosX <= 792) {
+            iSqX = 1;
+        }
+        else if (iPosX > 792) {
+            iSqX = 2;
+        }
+        if (iPosY <= 255) {
+            iSqY = 0;
+        }
+        else if (iPosY > 255 && iPosY <= 515) {
+            iSqY = 1;
+        }
+        else {
+            iSqY = 2;
+        }
+        if ((player_Turn == its_ronaldo) &&
+            (iSqX < 3) && (iSqY < 3) &&
+            (board_value[iSqX][iSqY] == blank))
+        {
+            board_value[iSqX][iSqY] = its_ronaldo;
+            return true;
+        }
     }
     return false;
 }

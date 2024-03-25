@@ -10,9 +10,6 @@ WCHAR szWindowClass[MAX_LOADSTRING];            // the main window class name
 
 bool start_Game = false;
 
-LPCWSTR file_gameimage = L"./data/gamebackground.bmp";
-HBITMAP gameimage = (HBITMAP)LoadImage(NULL, file_gameimage, IMAGE_BITMAP, 1075, 825, LR_LOADFROMFILE);
-
 using namespace Gdiplus;
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
@@ -22,7 +19,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 {
     UNREFERENCED_PARAMETER(hPrevInstance);
     UNREFERENCED_PARAMETER(lpCmdLine);
-
     // TODO: Place code here.
     GdiplusStartupInput gdiplusStartupInput;
     ULONG_PTR           gdiplusToken;
@@ -106,11 +102,6 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    {
       return FALSE;
    }
-
-   /*if (&messiJPG == NULL) {
-       MessageBox(hWnd, L"Pictures Not Loaded", L"Unlucky",
-           MB_OK);
-   }*/
 
    ShowWindow(hWnd, nCmdShow);
    UpdateWindow(hWnd);

@@ -11,9 +11,6 @@ extern WCHAR szWindowClass[MAX_LOADSTRING];            // the main window class 
 
 extern bool start_Game;
 
-extern LPCWSTR file_gameimage;
-extern HBITMAP gameimage;
-
 // Forward declarations of functions included in this code module:
 ATOM                MyRegisterClass(HINSTANCE hInstance);
 BOOL                InitInstance(HINSTANCE, int);
@@ -27,8 +24,7 @@ extern square_x_o board_value[3][3];
 //void text_vs(HWND hwnd, HDC hdc);
 void draw_Board(HDC hdc);
 
-bool place_Messi(HWND hwnd, LPARAM lParam);
-bool place_Ronaldo(LPARAM lparam);
+bool place_Face(HWND hWnd, LPARAM lparam);
 
 void new_Game();
 bool winner_Messi();
