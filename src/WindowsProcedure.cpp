@@ -13,7 +13,7 @@
 #include <iostream>
 
 #define BUTTON(name,PosX,PosY,DEFINITION) ::CreateWindow (L"BUTTON", name, WS_CHILD | WS_BORDER,\
-                                                          PosX, PosY, 100, 50, hWnd,\
+                                                          PosX, PosY, 135, 50, hWnd,\
                                                           (HMENU)DEFINITION, NULL, NULL)
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
@@ -51,32 +51,25 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     }
     case WM_CREATE:
         //CRASHES IF I HAVE THE MESSAGE BOX OUTSIDE THE SWITCH
-        BUTTON(L"New Game", 150, 50, NEW_GAME_BTN);
+        BUTTON(L"Tic Tac Toe", 462, 480, NEW_GAME_BTN);
 
         break;
     case WM_PAINT:
     {
         hdc = BeginPaint(hWnd, &ps);
         Gdiplus::Graphics graphics(hdc);
+        Gdiplus::Image MAINBACKGROUND(L"./data/mainbackground.png");
         Gdiplus::Image MESSI(L"./data/messi.png");
         Gdiplus::Image RONALDO(L"./data/ronaldo.png");
-        Gdiplus::Image BACKGROUND(L"./data/gamebackground.png");
+        Gdiplus::Image GAMEBACKGROUND(L"./data/gamebackground.png");
         if (!start_Game) {
             show_New_Game_Button(hWnd);
+            graphics.DrawImage(&MAINBACKGROUND, 0, 0, 1075, 825);
 
-            RECT rc;
-            GetClientRect(hWnd, &rc);
-
-            SelectObject(hdc, GetStockObject(DEFAULT_GUI_FONT));
-            SetBkMode(hdc, TRANSPARENT);
-            SetTextColor(hdc, RGB(0, 0, 0));
-
-            std::wstring strOut = L"VS"; // or wstring if you have unicode set
-            DrawText(hdc, strOut.c_str(), strOut.length(), &rc, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
         }
 
         if (start_Game) {
-            graphics.DrawImage(&BACKGROUND, 0, 0);
+            graphics.DrawImage(&GAMEBACKGROUND, 0, 0);
             draw_Board(hdc);
             for (int iX = 0; iX < 3; iX++) {
                 for (int iY = 0; iY < 3; iY++) {
