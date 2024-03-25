@@ -63,12 +63,12 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         hdc = BeginPaint(hWnd, &ps);
         Gdiplus::Graphics graphics(hdc);
         Gdiplus::Image MESSI(L"./data/messi.png");
+        Gdiplus::Image RONALDO(L"./data/ronaldo.png");
         if (!start_Game) {
             show_New_Game_Button(hWnd);
             render_First_Scene(hdc);
-
-            
-            graphics.DrawImage(&MESSI, 40, 40);
+                        
+            //graphics.DrawImage(&MESSI, 40, 40);
 
             RECT rc;
             GetClientRect(hWnd, &rc);
@@ -86,15 +86,13 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             ***REMOVED***
             for (int iX = 0; iX < 3; iX++) {
                 for (int iY = 0; iY < 3; iY++) {
+                    int PosX = iX * 260;
+                    int PosY = iY * 260;
                     if (board_value[iX][iY] == its_messi) {
-                        graphics.DrawImage(&MESSI, 40, 40);
+                        graphics.DrawImage(&MESSI, PosX, PosY, 250, 250);
                     }
-                }
-            }
-            for (int iX = 0; iX < 3; iX++) {
-                for (int iY = 0; iY < 3; iY++) {
-                    if (board_value[iX][iY] == its_ronaldo) {
-                        draw_Ronaldo(hdc, iX, iY);
+                    else if (board_value[iX][iY] == its_ronaldo) {
+                        graphics.DrawImage(&RONALDO, PosX, PosY, 250, 250);
                     }
                 }
             }

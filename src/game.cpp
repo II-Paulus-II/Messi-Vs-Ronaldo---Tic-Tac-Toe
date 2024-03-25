@@ -7,7 +7,7 @@ extern square_x_o board_value[3][3] = { { blank , blank , blank },
 
 
 void render_First_Scene(HDC hdc) {
-    HDC hdcMem = CreateCompatibleDC(hdc); //
+    /*HDC hdcMem = CreateCompatibleDC(hdc); //
     SelectObject(hdcMem, messi);
     int PosX = 100;
     int PosY = 200;
@@ -43,7 +43,7 @@ void render_First_Scene(HDC hdc) {
         SRCCOPY);
 
     SelectObject(hdcMemA, ronaldo);
-    DeleteObject(hdcMemA);
+    DeleteObject(hdcMemA); */
 }
 
 void draw_Board(HDC hdc) {
@@ -70,7 +70,7 @@ void draw_Board(HDC hdc) {
     // Draw the board lines
     HPEN hLinePen;
     COLORREF qLineColor;
-    qLineColor = RGB(0, 0, 0);
+    qLineColor = RGB(255, 255, 255);
     hLinePen = CreatePen(PS_SOLID, 10, qLineColor);
     hPenOld = (HPEN)SelectObject(hdc, hLinePen);
     // Draw two vertical lines
@@ -86,85 +86,6 @@ void draw_Board(HDC hdc) {
 
     SelectObject(hdc, hPenOld);
     DeleteObject(hLinePen);
-}
-
-void draw_Messi(HDC hdc, int iX, int iY) {
-    //HDC hdcMem = CreateCompatibleDC(hdc); //
-   // SelectObject(hdcMem, messi);
-    int PosX, PosY;
-    if (iX == 0) {
-        PosX = 0;
-    }
-    else if (iX == 1) {
-        PosX = 260;
-    }
-    else {
-        PosX = 520;
-    }
-    if (iY == 0) {
-        PosY = 0;
-    }
-    else if (iY == 1) {
-        PosY = 260;
-    }
-    else {
-        PosY = 520;
-    }
-
-   /* BitBlt(
-        hdc,
-        PosX,
-        PosY,
-        250,
-        250,
-        hdcMem,
-        0,
-        0,
-        SRCCOPY); */
-
-   // SelectObject(hdcMem, messi);
-   // DeleteObject(hdcMem);
-
-   Gdiplus::Graphics graphics(hdc);
-   Gdiplus::Image messiJPG(L"./data/messi.jpeg");
-   graphics.DrawImage(&messiJPG, PosX, PosY);
-}
-
-void draw_Ronaldo(HDC hdc, int iX, int iY) {
-    HDC hdcMem = CreateCompatibleDC(hdc); //
-    SelectObject(hdcMem, ronaldo);
-    int PosX, PosY;
-    if (iX == 0) {
-        PosX = 0;
-    }
-    else if (iX == 1) {
-        PosX = 260;
-    }
-    else {
-        PosX = 520;
-    }
-    if (iY == 0) {
-        PosY = 0;
-    }
-    else if (iY == 1) {
-        PosY = 260;
-    }
-    else {
-        PosY = 520;
-    }
-
-    BitBlt(
-        hdc,
-        PosX,
-        PosY,
-        250,
-        250,
-        hdcMem,
-        0,
-        0,
-        SRCCOPY);
-    SelectObject(hdcMem, ronaldo);
-    DeleteObject(hdcMem);
 }
 
 bool place_Messi(HWND hwnd, LPARAM lparam) {

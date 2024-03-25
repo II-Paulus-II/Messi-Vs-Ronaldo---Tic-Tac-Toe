@@ -10,17 +10,8 @@ WCHAR szWindowClass[MAX_LOADSTRING];            // the main window class name
 
 bool start_Game = false;
 
-LPCWSTR file_mainimage = L"./data/main.bmp";
-HBITMAP mainimage = (HBITMAP)LoadImage(NULL, file_mainimage, IMAGE_BITMAP, 250, 250, LR_LOADFROMFILE);
-
 LPCWSTR file_gameimage = L"./data/gamebackground.bmp";
 HBITMAP gameimage = (HBITMAP)LoadImage(NULL, file_gameimage, IMAGE_BITMAP, 1075, 825, LR_LOADFROMFILE);
-
-LPCWSTR file_messi = L"./data/messi.bmp";
-HBITMAP messi = (HBITMAP)LoadImage(NULL, file_messi, IMAGE_BITMAP, 250, 250, LR_LOADTRANSPARENT);
-
-LPCWSTR file_ronaldo = L"./data/ronaldo.bmp";
-HBITMAP ronaldo = (HBITMAP)LoadImage(NULL, file_ronaldo, IMAGE_BITMAP, 250, 250, LR_LOADFROMFILE);
 
 using namespace Gdiplus;
 
