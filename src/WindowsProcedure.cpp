@@ -66,9 +66,6 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         Gdiplus::Image RONALDO(L"./data/ronaldo.png");
         if (!start_Game) {
             show_New_Game_Button(hWnd);
-            render_First_Scene(hdc);
-                        
-            //graphics.DrawImage(&MESSI, 40, 40);
 
             RECT rc;
             GetClientRect(hWnd, &rc);
@@ -83,7 +80,6 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
         if (start_Game) {
             draw_Board(hdc);
-            ***REMOVED***
             for (int iX = 0; iX < 3; iX++) {
                 for (int iY = 0; iY < 3; iY++) {
                     int PosX = iX * 260;
