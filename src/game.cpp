@@ -36,8 +36,8 @@ bool place_Face(HWND hWnd, LPARAM lparam) {
     int iPosY = HIWORD(lparam);
     //check for valid move
     if (iPosX >=330 && iPosX <= 1020 ) {
-        int iSqX;
-        int iSqY;
+        int iSqX = 0;
+        int iSqY = 0;
         //get board values
         if (iPosX >= 330 && iPosX <= 556) {
             iSqX = 0;

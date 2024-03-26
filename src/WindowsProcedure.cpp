@@ -68,6 +68,10 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         Gdiplus::Image MESSIWINS(L"./data/messiwins.png");
         Gdiplus::Image RONALDOWINS(L"./data/ronaldowins.png");
         Gdiplus::Image NOBODYWON(L"./data/nobodywon.png");
+        Gdiplus::Image RONALDOSTURN(L"./data/ronaldosturn.png");
+        Gdiplus::Image MESSISTURN(L"./data/messisturn.png");
+        Gdiplus::Image RIGHTMOUSEBTN(L"./data/rightmousebutton.png");
+        Gdiplus::Image LEFTMOUSEBTN(L"./data/leftmousebutton.png");
 
         if (game == no_game || game == nobody_won) {
             show_Game_Buttons(hWnd);
@@ -78,6 +82,14 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         if (game == new_game) {
             graphics.DrawImage(&GAMEBACKGROUND, 0, 0);
             draw_Board(hdc);
+            if (player_Turn == its_ronaldo) {
+                graphics.DrawImage(&RONALDOSTURN, 25, 100, 280, 130);
+                graphics.DrawImage(&LEFTMOUSEBTN, 80, 250);
+            }
+            if (player_Turn == its_messi) {
+                graphics.DrawImage(&MESSISTURN, 68, 100, 194, 130);
+                graphics.DrawImage(&RIGHTMOUSEBTN, 80, 250);
+            }
             for (int iX = 0; iX < 3; iX++) {
                 for (int iY = 0; iY < 3; iY++) {
                     int PosX = (iX * 226) + 343;
