@@ -51,8 +51,17 @@
     <Image Include="resources\small.ico">
       <Filter>Resource Files</Filter>
     </Image>
-  </ItemGroup>
-  <ItemGroup>
-    <Xml Include="resources\mainfest.xml" />
+    <Image Include="data\messi.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\ronaldo.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\gamebackground.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="data\mainbackground.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

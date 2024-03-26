@@ -25,7 +25,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     {
     case WM_LBUTTONDOWN:
     {
-        if (start_Game) {
+        if (game == new_game) {
             if (player_Turn == its_ronaldo) {
                 bool ValidMove = place_Face(hWnd, lParam);
                 if (ValidMove) {
@@ -38,7 +38,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     }
     case WM_RBUTTONDOWN:
     {
-        if (start_Game) {
+        if (game == new_game) {
             if (player_Turn == its_messi) {
                 bool ValidMove = place_Face(hWnd, lParam);
                 if (ValidMove) {
@@ -62,13 +62,16 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         Gdiplus::Image MESSI(L"./data/messi.png");
         Gdiplus::Image RONALDO(L"./data/ronaldo.png");
         Gdiplus::Image GAMEBACKGROUND(L"./data/gamebackground.png");
-        if (!start_Game) {
+        Gdiplus::Image MESSIWINS(L"./data/messiwins.png");
+        Gdiplus::Image RONALDOWINS(L"./data/ronaldowins.png");
+
+        if (game == no_game) {
             show_New_Game_Button(hWnd);
             graphics.DrawImage(&MAINBACKGROUND, 0, 0, 1075, 825);
 
         }
 
-        if (start_Game) {
+        if (game == new_game) {
             graphics.DrawImage(&GAMEBACKGROUND, 0, 0);
             draw_Board(hdc);
             for (int iX = 0; iX < 3; iX++) {
@@ -85,22 +88,24 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             }
             bool messi_wins = winner_Messi();
             if (messi_wins) {
-                MessageBox(hWnd, _T("Messi Won"), _T("Result"), MB_OK);
-                new_Game();
-                InvalidateRect(hWnd, NULL, TRUE);
+                InvalidateRect(hWnd, NULL, FALSE);
             }
             bool ronaldo_wins = winner_Ronaldo();
             if (ronaldo_wins) {
-                MessageBox(hWnd, _T("Ronaldo Won"), _T("Result"), MB_OK);
-                new_Game();
-                InvalidateRect(hWnd, NULL, TRUE);
+                InvalidateRect(hWnd, NULL, FALSE);
             }
             bool nobody_won = nobody_Wins();
             if (nobody_won) {
-                MessageBox(hWnd, _T("Nobody Won"), _T("Nobody Result"), MB_OK);
+                MessageBox(hWnd, _T("Nobody Won, Play Again!"), _T("Result"), MB_OK);
                 new_Game();
-                InvalidateRect(hWnd, NULL, TRUE);
+                InvalidateRect(hWnd, NULL, FALSE);
             }
+        }
+        if (game == messi_won) {
+            graphics.DrawImage(&MESSIWINS, 0, 0, 1075, 825);
+        }
+        if (game == ronaldo_won) {
+            graphics.DrawImage(&RONALDOWINS, 0, 0, 1075, 825);
         }
         EndPaint(hWnd, &ps);
     }
@@ -117,9 +122,9 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         case ID_FILE_NEWGAME:
         {
             new_Game(); //make sure that the enum is filled out blank
-            start_Game = true;
+            game = new_game;
             show_New_Game_Button(hWnd);
-            InvalidateRect(hWnd, NULL, TRUE);
+            InvalidateRect(hWnd, NULL, FALSE);
         }
         break;
         case IDM_EXIT:

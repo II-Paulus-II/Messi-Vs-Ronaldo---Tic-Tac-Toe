@@ -149,11 +149,12 @@
     <ResourceCompile Include="resources\resources.rc" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="data\gamebackground.png" />
+    <Image Include="data\mainbackground.png" />
+    <Image Include="data\messi.png" />
+    <Image Include="data\ronaldo.png" />
     <Image Include="resources\big.ico" />
     <Image Include="resources\small.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Xml Include="resources\mainfest.xml" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

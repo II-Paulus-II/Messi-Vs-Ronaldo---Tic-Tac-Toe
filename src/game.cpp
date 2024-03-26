@@ -1,50 +1,10 @@
 #include "../include/main.h"
 
-extern square_x_o player_Turn = blank;
-extern square_x_o board_value[3][3] = { { blank , blank , blank },
+square_x_o player_Turn = blank;
+square_x_o board_value[3][3] = { { blank , blank , blank },
                                 { blank , blank , blank },
                                 { blank , blank , blank } };
 
-
-void render_First_Scene(HDC hdc) {
-    /*HDC hdcMem = CreateCompatibleDC(hdc); //
-    SelectObject(hdcMem, messi);
-    int PosX = 100;
-    int PosY = 200;
-
-    BitBlt(
-        hdc,
-        PosX,
-        PosY,
-        250,
-        250,
-        hdcMem,
-        0,
-        0,
-        SRCCOPY);
-
-    SelectObject(hdcMem, messi);
-    DeleteObject(hdcMem);
-
-    HDC hdcMemA = CreateCompatibleDC(hdc); //
-    SelectObject(hdcMemA, ronaldo);
-    PosX = 400;
-    PosY = 200;
-
-    BitBlt(
-        hdc,
-        PosX,
-        PosY,
-        250,
-        250,
-        hdcMemA,
-        0,
-        0,
-        SRCCOPY);
-
-    SelectObject(hdcMemA, ronaldo);
-    DeleteObject(hdcMemA); */
-}
 
 void draw_Board(HDC hdc) {
 
@@ -121,17 +81,20 @@ bool winner_Messi() {
     if ((board_value[0][0] == its_messi && board_value[0][1] == its_messi && board_value[0][2] == its_messi) ||
         (board_value[1][0] == its_messi && board_value[1][1] == its_messi && board_value[1][2] == its_messi) ||
         (board_value[2][0] == its_messi && board_value[2][1] == its_messi && board_value[2][2] == its_messi)) {
+        game = messi_won;
         return true;
     }
     //horizontal lines
     if ((board_value[0][0] == its_messi && board_value[1][0] == its_messi && board_value[2][0] == its_messi) ||
         (board_value[0][1] == its_messi && board_value[1][1] == its_messi && board_value[2][1] == its_messi) ||
         (board_value[0][2] == its_messi && board_value[1][2] == its_messi && board_value[2][2] == its_messi)) {
+        game = messi_won;
         return true;
     }
     // diagonal
     if ((board_value[0][0] == its_messi && board_value[1][1] == its_messi && board_value[2][2] == its_messi) ||
         (board_value[0][2] == its_messi && board_value[1][1] == its_messi && board_value[2][0] == its_messi)) {
+        game = messi_won;
         return true;
     }
 
@@ -143,17 +106,20 @@ bool winner_Ronaldo() {
     if ((board_value[0][0] == its_ronaldo && board_value[0][1] == its_ronaldo && board_value[0][2] == its_ronaldo) ||
         (board_value[1][0] == its_ronaldo && board_value[1][1] == its_ronaldo && board_value[1][2] == its_ronaldo) ||
         (board_value[2][0] == its_ronaldo && board_value[2][1] == its_ronaldo && board_value[2][2] == its_ronaldo)) {
+        game = ronaldo_won;
         return true;
     }
     //horizontal lines
     if ((board_value[0][0] == its_ronaldo && board_value[1][0] == its_ronaldo && board_value[2][0] == its_ronaldo) ||
         (board_value[0][1] == its_ronaldo && board_value[1][1] == its_ronaldo && board_value[2][1] == its_ronaldo) ||
         (board_value[0][2] == its_ronaldo && board_value[1][2] == its_ronaldo && board_value[2][2] == its_ronaldo)) {
+        game = ronaldo_won;
         return true;
     }
     // diagonal
     if ((board_value[0][0] == its_ronaldo && board_value[1][1] == its_ronaldo && board_value[2][2] == its_ronaldo) ||
         (board_value[0][2] == its_ronaldo && board_value[1][1] == its_ronaldo && board_value[2][0] == its_ronaldo)) {
+        game = ronaldo_won;
         return true;
     }
 
@@ -184,7 +150,7 @@ bool nobody_Wins() {
 void show_New_Game_Button(HWND hWnd) {
     HWND new_Game_Button = GetDlgItem(hWnd, NEW_GAME_BTN);
 
-    if (!start_Game) {
+    if (game == no_game) {
         ShowWindow(new_Game_Button, SW_SHOW);
     }
     else {
