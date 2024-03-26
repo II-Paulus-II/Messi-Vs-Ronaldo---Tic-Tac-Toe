@@ -78,13 +78,26 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             draw_Board(hdc);
             for (int iX = 0; iX < 3; iX++) {
                 for (int iY = 0; iY < 3; iY++) {
-                    int PosX = (iX * 260) + 275;
-                    int PosY = iY * 260;
+                    int PosX = (iX * 226) + 343;
+                    int PosY = iY * 226 + 68;
+                    if (iX == 1) {
+                        PosX += 6;
+                    }
+                    else if (iX == 2) {
+                        PosX += 12;
+                    }
+                    if (iY == 1) {
+                        PosY += 6;
+                    }
+                    else if (iY == 2) {
+                        PosY += 12;
+                    }
                     if (board_value[iX][iY] == its_messi) {
-                        graphics.DrawImage(&MESSI, PosX, PosY, 250, 250);
+
+                        graphics.DrawImage(&MESSI, PosX, PosY, 200, 200);
                     }
                     else if (board_value[iX][iY] == its_ronaldo) {
-                        graphics.DrawImage(&RONALDO, PosX, PosY, 250, 250);
+                        graphics.DrawImage(&RONALDO, PosX, PosY, 200, 200);
                     }
                 }
             }

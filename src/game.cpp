@@ -17,15 +17,15 @@ void draw_Board(HDC hdc) {
     hLinePen = CreatePen(PS_SOLID, 6, qLineColor);
     hPenOld = (HPEN)SelectObject(hdc, hLinePen);
     // Draw two vertical lines
-    MoveToEx(hdc, 532, 0, NULL);
-    LineTo(hdc, 532, 767);
-    MoveToEx(hdc, 792, 0, NULL);
-    LineTo(hdc, 792, 767);
+    MoveToEx(hdc, 556, 55, NULL);
+    LineTo(hdc, 556, 745);
+    MoveToEx(hdc, 788, 55, NULL);
+    LineTo(hdc, 788, 745);
     // two horizontal ones
-    MoveToEx(hdc, 275, 257, NULL);
-    LineTo(hdc, 1050, 257);
-    MoveToEx(hdc, 275, 517, NULL);
-    LineTo(hdc, 1050, 517);
+    MoveToEx(hdc, 330, 281, NULL);
+    LineTo(hdc, 1020, 281);
+    MoveToEx(hdc, 330, 513, NULL);
+    LineTo(hdc, 1020, 513);
 
     SelectObject(hdc, hPenOld);
     DeleteObject(hLinePen);
@@ -35,23 +35,23 @@ bool place_Face(HWND hWnd, LPARAM lparam) {
     int iPosX = LOWORD(lparam);
     int iPosY = HIWORD(lparam);
     //check for valid move
-    if (iPosX >=275 && iPosX <= 1040 ) {
+    if (iPosX >=330 && iPosX <= 1020 ) {
         int iSqX;
         int iSqY;
         //get board values
-        if (iPosX >= 275 && iPosX <= 532) {
+        if (iPosX >= 330 && iPosX <= 556) {
             iSqX = 0;
         }
-        else if (iPosX > 532 && iPosX <= 792) {
+        else if (iPosX > 556 && iPosX <= 788) {
             iSqX = 1;
         }
-        else if (iPosX > 792) {
+        else if (iPosX > 788) {
             iSqX = 2;
         }
-        if (iPosY <= 255) {
+        if (iPosY <= 281) {
             iSqY = 0;
         }
-        else if (iPosY > 255 && iPosY <= 515) {
+        else if (iPosY > 281 && iPosY <= 513) {
             iSqY = 1;
         }
         else {
