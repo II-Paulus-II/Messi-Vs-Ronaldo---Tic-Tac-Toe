@@ -53,7 +53,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         //CRASHES IF I HAVE THE MESSAGE BOX OUTSIDE THE SWITCH
         BUTTON(L"Tic Tac Toe", 462, 480, NEW_GAME_BTN);
         BUTTON(L"Play Again!", 438, 254, MESSI_WON_BTN);
-        BUTTON(L"Play Again", 472, 245, RONALDO_WON_BTN);
+        BUTTON(L"Play Again!", 472, 245, RONALDO_WON_BTN);
+        BUTTON(L"Draw! Play Again!", 485, 550, NOBODY_WON_BTN);
 
         break;
     case WM_PAINT:
@@ -66,8 +67,9 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         Gdiplus::Image GAMEBACKGROUND(L"./data/gamebackground.png");
         Gdiplus::Image MESSIWINS(L"./data/messiwins.png");
         Gdiplus::Image RONALDOWINS(L"./data/ronaldowins.png");
+        Gdiplus::Image NOBODYWON(L"./data/nobodywon.png");
 
-        if (game == no_game) {
+        if (game == no_game || game == nobody_won) {
             show_Game_Buttons(hWnd);
             graphics.DrawImage(&MAINBACKGROUND, 0, 0, 1075, 825);
 
@@ -104,18 +106,17 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             bool messi_wins = winner_Messi();
             if (messi_wins) {
                 show_Game_Buttons(hWnd);
-                InvalidateRect(hWnd, NULL, FALSE);
+                InvalidateRect(hWnd, NULL, TRUE);
             }
             bool ronaldo_wins = winner_Ronaldo();
             if (ronaldo_wins) {
                 show_Game_Buttons(hWnd);
-                InvalidateRect(hWnd, NULL, FALSE);
+                InvalidateRect(hWnd, NULL, TRUE);
             }
             bool nobody_won = nobody_Wins();
             if (nobody_won) {
-                MessageBox(hWnd, _T("Nobody Won, Play Again!"), _T("Result"), MB_OK);
-                new_Game();
-                InvalidateRect(hWnd, NULL, FALSE);
+                show_Game_Buttons(hWnd);
+                InvalidateRect(hWnd, NULL, TRUE);
             }
         }
         if (game == messi_won) {
@@ -123,6 +124,9 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         }
         if (game == ronaldo_won) {
             graphics.DrawImage(&RONALDOWINS, 0, 0, 1075, 825);
+        }
+        if (game == nobody_won) {
+            graphics.DrawImage(&NOBODYWON, 0, 0, 1075, 825);
         }
         EndPaint(hWnd, &ps);
     }
@@ -140,6 +144,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         case NEW_GAME_BTN:
         case MESSI_WON_BTN:
         case RONALDO_WON_BTN:
+        case NOBODY_WON_BTN:
         {
             new_Game(); //make sure that the enum is filled out blank
             game = new_game;

@@ -13,6 +13,7 @@
 #define NEW_GAME_BTN			1006
 #define MESSI_WON_BTN           1007
 #define RONALDO_WON_BTN         1008
+#define NOBODY_WON_BTN          1009
 #define IDI_MESSIVRONALDOTICTACTOE			107
 #define IDI_SMALL				108
 #define IDC_MESSIVRONALDOTICTACTOE			109
