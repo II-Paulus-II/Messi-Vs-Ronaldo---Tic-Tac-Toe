@@ -147,13 +147,27 @@ bool nobody_Wins() {
     return true;
 }
 
-void show_New_Game_Button(HWND hWnd) {
+void show_Game_Buttons(HWND hWnd) {
     HWND new_Game_Button = GetDlgItem(hWnd, NEW_GAME_BTN);
+    HWND messi_Won_Button = GetDlgItem(hWnd, MESSI_WON_BTN);
+    HWND ronaldo_Won_Button = GetDlgItem(hWnd, RONALDO_WON_BTN);
 
     if (game == no_game) {
         ShowWindow(new_Game_Button, SW_SHOW);
     }
     else {
         ShowWindow(new_Game_Button, SW_HIDE);
+    }
+    if (game == messi_won) {
+        ShowWindow(messi_Won_Button, SW_SHOW);
+    }
+    else {
+        ShowWindow(messi_Won_Button, SW_HIDE);
+    }
+    if (game == ronaldo_won) {
+        ShowWindow(ronaldo_Won_Button, SW_SHOW);
+    }
+    else {
+        ShowWindow(ronaldo_Won_Button, SW_HIDE);
     }
 }

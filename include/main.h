@@ -32,5 +32,5 @@ bool winner_Messi();
 bool winner_Ronaldo();
 bool nobody_Wins();
 
-void show_New_Game_Button(HWND hWnd);
+void show_Game_Buttons(HWND hWnd);
 

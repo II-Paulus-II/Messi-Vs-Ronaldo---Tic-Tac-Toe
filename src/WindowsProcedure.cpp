@@ -52,6 +52,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     case WM_CREATE:
         //CRASHES IF I HAVE THE MESSAGE BOX OUTSIDE THE SWITCH
         BUTTON(L"Tic Tac Toe", 462, 480, NEW_GAME_BTN);
+        BUTTON(L"Play Again!", 438, 254, MESSI_WON_BTN);
+        BUTTON(L"Play Again", 472, 245, RONALDO_WON_BTN);
 
         break;
     case WM_PAINT:
@@ -66,7 +68,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         Gdiplus::Image RONALDOWINS(L"./data/ronaldowins.png");
 
         if (game == no_game) {
-            show_New_Game_Button(hWnd);
+            show_Game_Buttons(hWnd);
             graphics.DrawImage(&MAINBACKGROUND, 0, 0, 1075, 825);
 
         }
@@ -88,10 +90,12 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             }
             bool messi_wins = winner_Messi();
             if (messi_wins) {
+                show_Game_Buttons(hWnd);
                 InvalidateRect(hWnd, NULL, FALSE);
             }
             bool ronaldo_wins = winner_Ronaldo();
             if (ronaldo_wins) {
+                show_Game_Buttons(hWnd);
                 InvalidateRect(hWnd, NULL, FALSE);
             }
             bool nobody_won = nobody_Wins();
@@ -120,10 +124,13 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             DialogBox(hInst, MAKEINTRESOURCE(IDD_ABOUTBOX), hWnd, About);
             break;
         case ID_FILE_NEWGAME:
+        case NEW_GAME_BTN:
+        case MESSI_WON_BTN:
+        case RONALDO_WON_BTN:
         {
             new_Game(); //make sure that the enum is filled out blank
             game = new_game;
-            show_New_Game_Button(hWnd);
+            show_Game_Buttons(hWnd);
             InvalidateRect(hWnd, NULL, FALSE);
         }
         break;
