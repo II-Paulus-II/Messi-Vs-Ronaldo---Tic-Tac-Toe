@@ -6,3 +6,7 @@ MessiVRonaldoTicTacToe.aps
 .vs/
 MessiVRonaldoTicTacToe.exe
 MessiVRonaldoTicTacToe.pdb
+.dep/
+.obj/
+.res/
+makefile
