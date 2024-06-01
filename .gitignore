@@ -9,4 +9,4 @@ MessiVRonaldoTicTacToe.pdb
 .dep/
 .obj/
 .res/
-makefile
+TicTacToe.exe

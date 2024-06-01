@@ -14,4 +14,4 @@ The game is for two players, and I have successfully entertained children with i
 
 ## Linux
 
-I have successfully used wine in linux to run programs that I have compiled there but this is the first time I have used GDI+ so I have yet to try. I suspect its not that hard, but if you want to cross-compile I have had problems cross-compiling in some distributions. [Basically Ubuntu]. If I add a makefile later, I will only be testing it in arch. 
+Use the makefile and change the CC flag within to reflect the compiler you have installed. You will also need some dll's if you want to run the file on windows and if you want to run it natively on wine linux you can do the same. 
