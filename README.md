@@ -16,5 +16,7 @@ The game is for two players, and I have successfully entertained children with i
 
 Use the makefile providing that mingw64 bit is installed. I wont be including the three dll's needed that will come with the compiler - you will find them in the bin subfolder of the compiler.  
 
+You must also use the linux branch because the rc files have different formats.
+
 https://www.mingw-w64.org/   
 https://archlinux.org/packages/?name=mingw-w64-gcc 
