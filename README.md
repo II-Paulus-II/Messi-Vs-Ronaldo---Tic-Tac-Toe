@@ -14,4 +14,7 @@ The game is for two players, and I have successfully entertained children with i
 
 ## Linux
 
-Use the makefile and change the CC flag within to reflect the compiler you have installed. You will also need some dll's if you want to run the file on windows and if you want to run it natively on wine linux you can do the same. 
+Use the makefile providing that mingw64 bit is installed. I wont be including the three dll's needed that will come with the compiler - you will find them in the bin subfolder of the compiler.  
+
+https://www.mingw-w64.org/   
+https://archlinux.org/packages/?name=mingw-w64-gcc 
