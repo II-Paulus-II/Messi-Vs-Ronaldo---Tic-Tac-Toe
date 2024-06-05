@@ -14,4 +14,7 @@ The game is for two players, and I have successfully entertained children with i
 
 ## Linux
 
-I have successfully used wine in linux to run programs that I have compiled there but this is the first time I have used GDI+ so I have yet to try. I suspect its not that hard, but if you want to cross-compile I have had problems cross-compiling in some distributions. [Basically Ubuntu]. If I add a makefile later, I will only be testing it in arch. 
+Use the makefile providing that mingw64 bit is installed. I wont be including the three dll's needed that will come with the compiler - you will find them in the bin subfolder of the compiler.  
+
+https://www.mingw-w64.org/   
+https://archlinux.org/packages/?name=mingw-w64-gcc 
